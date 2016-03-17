@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title='GitCms'
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+    link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", rel="stylesheet")
+  body
+    #header
+      .container-fluid
+        .row
+          nav.navbar.navbar-fixed-top.navbar-inverse
+            .container
+              .row
+                .navbar-header
+                  a(href='/').navbar-brand='GitCms'
+      .container(style='padding-top: 60px;')
+        block header
+    #content-main
+      .container
+        block content
+    #footer
+    block scripts

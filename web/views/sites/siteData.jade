@@ -1,0 +1,84 @@
+extends ../layout
+
+block header
+  
+block content
+  style
+    include diff.css
+  .row
+    .col-sm-6
+      h2
+        | Set Up Website
+    .col-sm-6
+      h2
+        | Changes
+  .row(style='margin-bottom: 50px;')
+    form.col-sm-6(name='SiteSetup')
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | Site Title
+        .col-sm-8
+          input.form-control(type='Text',name='title')
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | Site Subtitle
+        .col-sm-8
+          input.form-control(type='Text',name='subTitle')
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | Primary Hostname
+        .col-sm-8
+          input.form-control(type='Text',name='hostname')
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | Hostnames (Comma Separated)
+        .col-sm-8
+          input.form-control(type='Text',name='hostnames',data-type="CSV")
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | Options
+        .col-sm-8
+          input(type='checkbox',name='options',data-value='option1')
+          | Option 1
+          br
+          input(type='checkbox',name='options',data-value='option2')
+          | Option 2
+          br
+          input(type='checkbox',name='options',data-value='option3')
+          | Option 3
+          br
+          input(type='checkbox',name='options',data-value='option4')
+          | Option 4
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | SEO Description
+        .col-sm-8
+          textarea.form-control(type='Text',name='description')
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | SEO Geo Location
+        .col-sm-8
+          .row
+            .col-sm-6
+              input.form-control(type='number',name='latitude')
+            .col-sm-6
+              input.form-control(type='number',name='longitude')
+      .form-group.row(style='margin-bottom: 10px;')
+        label.col-sm-4
+          | Keywords (Comma Separated)
+        .col-sm-8
+          input.form-control(type='Text',name='keywords',data-type="CSV")
+      .form-group.row(style='margin-bottom: 10px;')
+        .col-sm-12
+          button.btn.btn-primary.pull-right(data-action='commit',data-config-type='SiteSetup')
+            i.fa.fa-cloud-upload
+            |  Publish Changes
+    .col-sm-6
+      .row#diff_SiteSetup
+
+block scripts
+  script(src='https://cdn.socket.io/socket.io-1.4.5.js')
+  script
+    include diff.js
+  script
+    include siteConfig.js

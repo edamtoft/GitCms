@@ -1,0 +1,56 @@
+extends ../layout
+
+block header
+  .col-sm-12
+    h1='Changes'
+  
+block content
+  .col-sm-12
+    if config.noChanges
+     h4='No Changes'
+    else
+      table.table.table-striped
+        thead
+          tr
+            td='Style Id'
+            td='Status'
+            td='Options'
+        tbody
+          each file in config.added
+            tr
+              td=file.configName
+              td='added'
+              td
+                .btn-group
+                  a.btn.btn-default(href='/site/config/#'+siteId, target='_blank')
+                    i.fa.fa-pencil(style='margin-right: 10px;')
+                    | Edit
+                  a.btn.btn-default(href='#')='View Diff'
+                    | Diff
+                  a.btn.btn-primary(data-action='commit', data-style-id=file.configName)
+                    i.fa.fa-cloud-upload(style='margin-right: 10px;')
+                    | Release
+          each file in config.removed
+            tr
+              td=file.configName
+              td='removed'
+              td
+                .btn-group
+                  a.btn.btn-primary(data-action='commit', data-style-id=file.configName)='Release Changes'
+          each file in config.modified
+            tr
+              td=file.configName
+              td='modified'
+              td
+                .btn-group
+                  a.btn.btn-default(href='/site/config/#'+siteId, target='_blank')
+                    i.fa.fa-pencil(style='margin-right: 10px;')
+                    | Edit
+                  a.btn.btn-default(href='#')
+                    | Changes
+                  a.btn.btn-primary(data-action='commit', data-style-id=file.configName)
+                    i.fa.fa-cloud-upload(style='margin-right: 10px;')
+                    | Release
+    
+block scripts
+  script

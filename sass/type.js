@@ -1,0 +1,21 @@
+"use strict";
+
+const type = {
+  COLOR: "COLOR",
+  HEX_COLOR: "HEX_COLOR",
+  RGB_COLOR: "RGB_COLOR",
+  RGBA_COLOR: "RGBA_COLOR",
+  SIZE: "SIZE",
+  PIXEL_SIZE: "PIXEL_SIZE",
+  EM_SIZE: "EM_SIZE",
+  REM_SIZE: "REM_SIZE",
+  PT_SIZE: "PT_SIZE",
+  NUMBER: "NUMBER",
+  FONT_FAMILY: "FONT_FAMILY",
+  IMAGE_URL: "IMAGE_URL",
+  URL: "URL",
+  IMPORT: "IMPORT",
+  BLOCK: "BLOCK"
+};
+
+module.exports = type;

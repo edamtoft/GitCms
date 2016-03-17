@@ -1,0 +1,22 @@
+{
+  "name": "resourcemanager",
+  "version": "1.0.0",
+  "description": "Test platform for managing resources",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Damtoft",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0",
+    "jade": "^1.11.0",
+    "nodegit": "^0.11.9",
+    "socket.io": "^1.4.5",
+    "winston": "^2.2.0",
+    "yamljs": "^0.2.6"
+  }
+}

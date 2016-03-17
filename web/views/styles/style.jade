@@ -1,0 +1,37 @@
+extends ../layout
+
+block header
+  .col-sm-12
+    h1='Edit Style'
+  
+block content
+  form#styles-form
+    each property in properties
+      .form-group.clearfix(style='margin-bottom: 10px;')
+        case property.type
+          when types.IMPORT
+            label.col-sm-3=property.readableName+' (Import)'
+            .col-sm-9
+              input.form-control(type='text',name=property.name)
+          when types.BLOCK
+            label.col-sm-3=property.readableName
+            .col-sm-9
+              textarea.form-control(name=property.name, style='height:200px;')
+          when types.COLOR
+            label.col-sm-3=property.sassName
+            .col-sm-9
+              input(type='color',name=property.name)
+          when types.NUMBER
+            label.col-sm-3=property.sassName
+            .col-sm-9
+              input.form-control(type='number',name=property.name)
+          default
+            label.col-sm-3=property.sassName
+            .col-sm-9
+              input.form-control(type='text',name=property.name)
+    .form-group.col-sm-12
+      button.btn.btn-primary(type="submit")='Save'
+    
+block scripts
+  script
+    include ../../client/style.js

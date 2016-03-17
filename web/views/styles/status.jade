@@ -1,0 +1,62 @@
+extends ../layout
+
+block header
+  .col-sm-12
+    h1='Changes'
+  
+block content
+  style
+    include diff.css
+  .col-sm-12
+    .row#diff
+  .col-sm-12
+    if styles.noChanges
+     h4='No Changes'
+    else
+      table.table.table-striped
+        thead
+          tr
+            td='Style Id'
+            td='Status'
+            td='Options'
+        tbody
+          each style in styles.added
+            tr
+              td=style.styleId
+              td='added'
+              td
+                .btn-group
+                  a.btn.btn-default(href='style/#'+style.styleId, target='_blank')
+                    i.fa.fa-pencil(style='margin-right: 10px;')
+                    | Edit
+                  a.btn.btn-default(href='#diff',data-style-id=style.styleId,data-action='diff')
+                    | Diff
+                  a.btn.btn-primary(data-action='commit', data-style-id=style.styleId)
+                    i.fa.fa-cloud-upload(style='margin-right: 10px;')
+                    | Release
+          each style in styles.removed
+            tr
+              td=style.styleId
+              td='removed'
+              td
+                .btn-group
+                  a.btn.btn-primary(data-action='commit', data-style-id=style.styleId)='Release Changes'
+          each style in styles.modified
+            tr
+              td=style.styleId
+              td='modified'
+              td
+                .btn-group
+                  a.btn.btn-default(href='style/#'+style.styleId, target='_blank')
+                    i.fa.fa-pencil(style='margin-right: 10px;')
+                    | Edit
+                  a.btn.btn-default(href='#diff',data-style-id=style.styleId,data-action='diff')
+                    | Changes
+                  a.btn.btn-primary(data-action='commit', data-style-id=style.styleId)
+                    i.fa.fa-cloud-upload(style='margin-right: 10px;')
+                    | Release
+    
+block scripts
+  script
+    include ../../client/stylesStatus.js
+    include ../../client/styleDiff.js
