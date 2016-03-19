@@ -14,7 +14,7 @@ class Server {
     this._app.set("view engine", "jade");
     this._app.use(parser.json());
     this._app.use((req,res,next) => {
-      log.debug(`Recieved request to ${req.path}`);
+      log.info(`[WEB] Recieved request to ${req.path}`);
       next();
     });
     for (let provider of routeProviders) {
@@ -32,8 +32,8 @@ class Server {
   }
   
   start() {
-    log.info("Starting web server");
-    this._server.listen(3000, () => log.info("Server Started"));
+    log.info("[WEB] Starting web server");
+    this._server.listen(3000, () => log.info("[WEB] Server Started"));
   }
 }
 

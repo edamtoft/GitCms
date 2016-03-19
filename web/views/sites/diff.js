@@ -13,9 +13,11 @@
     let left = "";
     let right = "";
     let unified = "";
-    // right += `<div class="diff-line diff-line_control">New Version</div>`;
-    // left += `<div class="diff-line diff-line_control">Previous Version</div>`;
-    // unified += `<div class="diff-line diff-line_control">Changes</div>`;
+    // if (diff && diff.length > 0) {
+    //   right += `<div class="diff-line diff-line_control">New Version</div>`;
+    //   left += `<div class="diff-line diff-line_control">Previous Version</div>`;
+    //   unified += `<div class="diff-line diff-line_control">Changes</div>`;
+    // } 
     for (let hunkIndex in diff) {
       let lines = diff[hunkIndex]
       let lastStatus = " ";
@@ -28,20 +30,20 @@
             if (lastStatus !== "-") {
               left += `<div class="diff-line diff-line_empty"></div>`;
             }
-            right += `<div class="diff-line diff-line_inserted">${line.content}</div>`;
-            unified += `<div class="diff-line diff-line_inserted">${line.content}</div>`;
+            right += `<div class="diff-line diff-line_inserted" title="${line.content.replace("\"","\\\"")}">${line.content}</div>`;
+            unified += `<div class="diff-line diff-line_inserted" title="${line.content.replace("\"","\\\"")}">${line.status}${line.content}</div>`;
             break;
           case "-":
             if (nextStatus !== "+") {
               right += `<div class="diff-line diff-line_empty"></div>`;
             }
-            left += `<div class="diff-line diff-line_deleted">${line.content}</div>`;
-            unified += `<div class="diff-line diff-line_deleted">${line.content}</div>`;
+            left += `<div class="diff-line diff-line_deleted" title="${line.content.replace("\"","\\\"")}">${line.content}</div>`;
+            unified += `<div class="diff-line diff-line_deleted" title="${line.content.replace("\"","\\\"")}">${line.status}${line.content}</div>`;
             break;
           default:
-            right += `<div class="diff-line diff-line_unchanged">${line.content}</div>`;
-            left += `<div class="diff-line diff-line_unchanged">${line.content}</div>`;
-            unified += `<div class="diff-line diff-line_unchanged">${line.content}</div>`;
+            right += `<div class="diff-line diff-line_unchanged" title="${line.content.replace("\"","\\\"")}">${line.content}</div>`;
+            left += `<div class="diff-line diff-line_unchanged" title="${line.content.replace("\"","\\\"")}">${line.content}</div>`;
+            unified += `<div class="diff-line diff-line_unchanged" title="${line.content.replace("\"","\\\"")}">${line.status}${line.content}</div>`;
             break;
         }
         lastStatus = line.status;

@@ -11,9 +11,9 @@
 }
 
 .diff-line {
-  height: 16pt;
-  line-height: 16pt;
-  font-size: 12pt;
+  height: 10pt;
+  line-height: 10pt;
+  font-size: 10pt;
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -21,9 +21,9 @@
 }
 
 .diff-line.diff-line_control {
-  background-color: #999;
+  background-color: #aaa;
   text-align: center;
-  color: white;
+  color: #666;
 }
 
 .diff-line.diff-line_inserted {
@@ -31,6 +31,5 @@
 }
 
 .diff-line.diff-line_deleted {
-  text-decoration: line-through;
   background-color: rgb(255,182,193);
 }

@@ -15,6 +15,7 @@ const styleSchema = {
   foregroundColor: sassType.COLOR,
   altColor: sassType.COLOR,
   altColor2: sassType.COLOR,
+  altColor3: sassType.COLOR,
   primaryFont: sassType.FONT_FAMILY,
   headerFont: sassType.FONT_FAMILY,
   textConfig: sassType.BLOCK,

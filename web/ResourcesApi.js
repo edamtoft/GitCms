@@ -37,7 +37,7 @@ class ResourcesApi extends RouteProvider {
   
   _getConfigDiff(websiteId, configName, res) {
     this._websiteDirectory(websiteId).getDiff({configName})
-    .then(diffs => res.json(diffs)).catch(err => res.sendStatus(410));
+    .then(diffs => res.json(diffs));
   }
   
   _readStyle(styleId, res) {

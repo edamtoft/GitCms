@@ -14,7 +14,7 @@ module.exports = class FileGroup {
   }
   
   _toPath(pathParameters) {
-    path.join(this._pathTemplate.replace(ROUTE_PARAM_REGEX, (match, prop) => file[prop]);
+    path.join(this._pathTemplate.replace(ROUTE_PARAM_REGEX, (match, prop) => pathParameters[prop]));
   }
   
   _fromPath(filePath) {
@@ -60,7 +60,6 @@ module.exports = class FileGroup {
           reject(err);
           return;
         }
-         
         this._repository.add(relativePath).then(() => resolve, err => reject(err));
       }))
       .catch(err => reject(err));
@@ -90,5 +89,10 @@ module.exports = class FileGroup {
   
   deserialize() {
     throw new Error("Serialize method must be overridden");
+  }
+  
+  afterRead(pathParams, absolutePath) {
+    // do nothing by default
+    return new Promise((resolve) => resolve());
   }
 }

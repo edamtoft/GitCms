@@ -20,6 +20,29 @@ module.exports = class Repository {
     return this._fileRouting;
   }
   
+  get baseDirectory() {
+    return this._baseDirectory;
+  }
+  
+  $add(relativePath) {
+    let index;
+    return this._repository.then(repository => repository.index())
+    .then(_index => { index = _index; return index.addByPath(relativePath); })
+    .then(() => index.writeTree())
+  }
+  
+  $commit(commitMessage, userName, userEmail) {
+    let repository,head,index;
+    return this._repository
+    .then(_repository => { respository = _repository; return repository.index(); })
+    .then(_index => { index = _index; return repository.getHeadCommit(); })
+    .then(head => { 
+      let author = git.Signature.now(userName,userEmail);
+      let committer = author;
+      return repository.createCommit("HEAD", author, committer, commitMessage, index.checksum(), [head]);
+    });
+  }
+
   commit(resources, commitMessage) {
     return new Promise((resolve, reject) => {
       let filesToCommit = resources.map(r => this._getRoute(r))  
@@ -27,11 +50,11 @@ module.exports = class Repository {
       .then(repository => { 
         let author = git.Signature.now("_system_","_system_");
         let committer = author;
-        log.info(`About to commit ${filesToCommit.join(",")}`);
+        log.info(`[SOURCE CONTROL] About to commit ${filesToCommit.join(",")}`);
         return repository.createCommitOnHead(filesToCommit, author, committer, commitMessage);
       })
       .then(commit => {
-        log.info(`Created commit with id ${commit}`);
+        log.info(`[SOURCE CONTROL] Created commit with id ${commit}`);
         return Promise.all(filesToCommit.map(file => this.onPublish(file)));
       })
       .then(() => resolve())
@@ -236,7 +259,7 @@ module.exports = class Repository {
   
   
   _initializeRepository() {
-    log.info(`Accessing repository for ${this.name}`)
+    log.info(`[SOURCE CONTROL] Accessing repository for ${this.name}`)
     let folderExists = fs.existsSync(this._baseDirectory);
     
     if (!folderExists) {
@@ -246,7 +269,7 @@ module.exports = class Repository {
     let repoExists = folderExists && fs.existsSync(path.join(this._baseDirectory,"/.git/"));
     
     if (!repoExists) { 
-      log.info(`Creating ${this.name} repository for the first time`);
+      log.info(`[SOURCE CONTROL] Creating ${this.name} repository for the first time`);
     }
     
     this._repository = repoExists ? 
@@ -254,7 +277,7 @@ module.exports = class Repository {
       git.Repository.init(this._baseDirectory, 0);
       
     this._repository.then(() => {
-        log.info(`Repository for ${this.name} loaded.`);
+        log.info(`[SOURCE CONTROL] Repository for ${this.name} loaded.`);
       },
       err => { 
         throw new Error(`Could not initialize or open repository: ${err}`) 
